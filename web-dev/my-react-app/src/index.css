@@ -1,0 +1,74 @@
+/* Styling for the title */
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#title {
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 40px;
+  color: #333;
+  padding: 10px;
+}
+
+/* Styling for all pages part of the login process */
+.login-body {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: #333;
+  background-color: hsl(0, 0%, 90%);
+  padding: 80px;
+  border: hsl(0, 0%, 70%) 2px solid;
+  border-radius: 10px;
+  max-width: 60%;
+  margin: auto;
+}
+
+/* Styling for input forms */
+form input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Styling for buttons */
+button {
+  width: 150px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  margin-top: 20px;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+/* Styling for hovering over button */
+button:hover {
+  border-color: #646cff;
+}
+
+/* Styling for clicking button */
+button:active {
+  outline: #646cff auto 1px;
+}
+
+/* Create a flexbox for pages with multiple buttons */
+#button-container {
+  display: flex;
+  justify-content: center;
+
+}
+
+#button-container div {
+  margin: 10px;
+  padding: 20px;
+  font-size: 24px;
+}
