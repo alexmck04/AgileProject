@@ -75,7 +75,7 @@ button:active {
 
 
 
-// chart css
+/*chart css */
 
 .chart-container {
   max-width: 950px;
@@ -130,4 +130,55 @@ button:active {
   font-weight: 500;
   color: #444;
   margin-top: 0.4rem;
+}
+
+
+/* Styling for the navigation bar */
+
+nav {
+  background-color: hsl(0, 0%, 96%);
+  
+  
+  border: 1px solid hsl(0, 0%, 90%);
+  border-radius: 8px;
+  margin: auto;
+  padding: 10px;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style-type: none;
+  background-color: hsl(0, 0%, 96%);
+
+}
+nav ul li {
+  display: inline;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin: 0 4px;
+  background-color: hsl(0, 0%, 96%);
+  color: #333;
+
+  
+}
+nav ul li a {
+  color: #333;
+  background-color: hsl(0, 0%, 96%);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+
+nav ul li a:hover {
+  background-color: hsl(0, 0%, 90%);
+  padding: 5px;
+  border-radius: 4px;
+}
+
+nav ul li a:active{
+  background-color: hsl(0, 0%, 80%);
+  
 }
