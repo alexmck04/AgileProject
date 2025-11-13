@@ -1,11 +1,14 @@
-// Import the functions you need from the SDKs you need
+// firebase.js
+
+// Import core Firebase SDK
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Import services you need
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+
+// Your Firebase project configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAtFvbwp0BKxP9MUb2Oj5rIwSsnkLzNqcU",
   authDomain: "game-sales-predictor.firebaseapp.com",
@@ -16,6 +19,14 @@ const firebaseConfig = {
   measurementId: "G-PB46MGFJ9Y"
 };
 
-// Initialize Firebase
+// Initialize Firebase app
 const app = initializeApp(firebaseConfig);
+
+// Optional analytics (works only on localhost or deployed HTTPS)
 const analytics = getAnalytics(app);
+
+// Export services so other files can use them
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+
+export default app;

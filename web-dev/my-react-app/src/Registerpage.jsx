@@ -1,97 +1,72 @@
 import validator from "validator";
 import { useNavigate } from "react-router-dom";
+import { auth, db } from "./firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 
 function Registerpage() {
   const navigator = useNavigate();
 
-  // Function to validate email format
-  const validateEmail = (email) => {;
-	return validator.isEmail(email)
-};
+  const validateEmail = (email) => {
+    return validator.isEmail(email);
+  };
 
   const checkSubmit = async (e) => {
-    // Disable default form submission behavior
     e.preventDefault();
 
-    // Get input values
     let name = document.getElementById("nameField").value;
     let email = document.getElementById("emailField").value;
     let password = document.getElementById("passwordField").value;
 
-    // Prevent submission if any field is empty
-    if (name === "" || email === "" || password === "") {
+    if (!name || !email || !password) {
       alert("Please fill in all fields.");
       return;
     }
 
-    // Validate email format and alert if invalid
     if (!validateEmail(email)) {
       alert("Please enter a valid email address.");
       return;
     }
 
-    // Create an object with the registration details
-    const registrationDetails = {
-      email,
-      password,
-      name,
-    };
-    alert("Registration successful!");
-    navigator("/login");
+    try {
+      //Create user in Firebase Auth
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
+      const user = userCredential.user;
 
+      //Store additional details in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        name: name,
+        email: email,
+        createdAt: new Date(),
+      });
 
-    
-//     // send registration details to backend as json
-//     try {
-//       const response = await fetch("#", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(registrationDetails),
-//       });
-
-//       // Handle response
-//       if (response.ok) {
-//         const result = await response.json();
-//         console.log(result);
-
-//         alert("Registration successful!");
-//         navigator("/login");
-
-     
-//       } else {
-//         const result = await response.json();
-//         console.log(result);
-//         alert(result.error);
-//       }
-//     } catch (error) {
-//       console.error(error);
-//       alert("Submission error.");
-//     }
+      alert("Registration successful!");
+      navigator("/login");
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    }
   };
-
-
 
   return (
     <div className="login-body">
       <h1>Register</h1>
-      {/* Registration details submission*/}
+
       <form onSubmit={checkSubmit}>
         <input type="text" id="nameField" placeholder="Enter name..." required />
 
-
         <input type="text" id="emailField" placeholder="Enter email..." required />
-
 
         <input type="password" id="passwordField" placeholder="Enter password..." required />
 
         <button type="submit" id="submit-button">Submit</button>
       </form>
-
-
     </div>
   );
 }
