@@ -12,6 +12,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import Navbar from "./NavBar";
 
 function ChartsPage() {
   const [rawData, setRawData] = useState([]);
@@ -92,6 +93,7 @@ function ChartsPage() {
 
   return (
     <div className="page-wrapper">
+      <Navbar />
       <div className="chart-container">
         <div className="chart-header">
           <h1>Game Sales Charts</h1>
