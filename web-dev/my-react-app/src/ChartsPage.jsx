@@ -105,19 +105,19 @@ function ChartsPage() {
             className={view === "top" ? "active" : ""}
             onClick={() => setView("top")}
           >
-            🏆 Top Games
+            Top Games
           </button>
           <button
             className={view === "genre" ? "active" : ""}
             onClick={() => setView("genre")}
           >
-            🎭 By Genre
+            By Genre
           </button>
           <button
             className={view === "console" ? "active" : ""}
             onClick={() => setView("console")}
           >
-            🎮 By Console
+            By Console
           </button>
         </div>
 
