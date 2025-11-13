@@ -154,19 +154,42 @@ function ChartsPage() {
                 />
               </BarChart>
             ) : (
-              <BarChart
+               <BarChart
                 data={chartData}
-                margin={{ top: 20, right: 30, left: 20, bottom: 100 }}
+                margin={{ top: 20, right: 60, left: 100, bottom: 100 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis
-                  dataKey={view === "top" ? "title" : "category"}
-                  angle={-45}
-                  textAnchor="end"
-                  interval={0}
-                  height={120}
-                />
-                <YAxis />
+        dataKey={view === "top" ? "title" : "category"}
+        angle={-45}
+        textAnchor="end"
+        fontSize={10}
+        interval={0}
+        height={115}
+      />
+      <YAxis
+        domain={view === "top" ? [0, 30] : [0, 1250]}
+        tickCount={7}
+        label={{
+          value: "Sales (Millions)",
+          position: "insideTopLeft",
+          dx: -100,
+        }}
+      />
+      {view === "top" && (
+        <YAxis
+          yAxisId="right"
+          orientation="right"
+          domain={[0, 10]}
+          interval={0}
+          tickCount={10}
+          label={{
+            value: "Critic Score",
+            position: "insideTopRight",
+            dx: 60,
+          }}
+        />
+      )}
                 <Tooltip
                   formatter={(value) =>
                     view === "genre"
@@ -182,6 +205,7 @@ function ChartsPage() {
                 />
                 {view === "top" && (
                   <Bar
+                  yAxisId="right"
                     dataKey="critic_score"
                     fill="#82ca9d"
                     name="Critic Score"
