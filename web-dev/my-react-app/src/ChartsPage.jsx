@@ -42,13 +42,19 @@ function ChartsPage() {
   useEffect(() => {
     if (!rawData.length) return;
 
+
     // ---------- TOP 20 GAMES ----------
-    if (view === "top") {
+    if (view === "top" || view === "table") {
       const cleaned = rawData
         .map((r) => ({
           title: r.title,
-          total_sales: parseFloat(r.total_sales),
+          console: r.console,
+          genre: r.genre,
+          publisher: r.publisher,
+          developer: r.developer,
           critic_score: parseFloat(r.critic_score),
+          total_sales: parseFloat(r.total_sales),
+          release_date: r.release_date,
         }))
         .filter(
           (r) =>
@@ -186,6 +192,11 @@ function ChartsPage() {
           <button className={view === "console" ? "active" : ""} onClick={() => setView("console")}>
             By Console
           </button>
+
+           <button className={view === "table" ? "active" : ""} onClick={() => setView("table")}>
+            Table View
+          </button>
+
         </div>
 
         {/* Chart */}
@@ -194,7 +205,38 @@ function ChartsPage() {
           <p>Loading data...</p>
         ) : view === "console" ? (
           <DonutChart data={chartData} />
-        ) : (
+        ) : view === "table" ? (
+            <table>
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Title</th>
+                  <th>Console</th>
+                  <th>Genre</th>
+                  <th>Publisher</th>
+                  <th>Developer</th>
+                  <th>Critic Score</th>
+                  <th>Total Sales (M)</th>
+                  <th>Release Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {chartData.map((game, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{game.title}</td>
+                    <td>{game.console}</td>
+                    <td>{game.genre}</td>
+                    <td>{game.publisher}</td>
+                    <td>{game.developer}</td>
+                    <td>{game.critic_score}</td>
+                    <td>{game.total_sales}</td>
+                    <td>{game.release_date}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
           <ResponsiveContainer width="100%" height={500}>
             <BarChart
               data={chartData}
