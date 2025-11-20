@@ -1,6 +1,6 @@
 // Charts Page
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Papa from "papaparse";
 import {
   BarChart,
@@ -15,8 +15,11 @@ import {
   Pie,
   Cell,
 } from "recharts";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 function ChartsPage() {
+  const chartRef = useRef(null);
   const [rawData, setRawData] = useState([]);
   const [chartData, setChartData] = useState([]);
   const [view, setView] = useState("top");
@@ -140,9 +143,31 @@ function ChartsPage() {
     </ResponsiveContainer>
   );
 
+   // Export chart as PDF
+  const handleSavePDF = async () => {
+    const element = chartRef.current;
+    if (!element) return;
+
+    const canvas = await html2canvas(element, {
+      scale: 2,
+      useCORS: true,
+    });
+
+    const imgData = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF({
+      orientation: "landscape",
+      unit: "px",
+      format: [canvas.width, canvas.height],
+    });
+
+    pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+    pdf.save(`chart-${view}.pdf`);
+  };
+
+
   return (
     <div className="page-wrapper">
-
       <div className="chart-container">
         <div className="chart-header">
           <h1>Game Sales Charts</h1>
@@ -164,6 +189,7 @@ function ChartsPage() {
         </div>
 
         {/* Chart */}
+        <div className="chart-content" ref={chartRef}>
         {!chartData.length ? (
           <p>Loading data...</p>
         ) : view === "console" ? (
@@ -212,7 +238,10 @@ function ChartsPage() {
               )}
 
               <Tooltip formatter={(value) => `${Math.round(value)} million units`} />
-              <Legend />
+                <Legend 
+                  verticalAlign="top"
+                />
+              
 
               <Bar dataKey="total_sales" fill="#8884d8" name="Total Sales (Millions)" />
               {view === "top" && (
@@ -221,6 +250,10 @@ function ChartsPage() {
             </BarChart>
           </ResponsiveContainer>
         )}
+        </div>
+        <div className="pdf-button-container">
+        <button id='pdf-button' onClick={handleSavePDF}>Save Chart as PDF</button>
+        </div>
       </div>
     </div>
   );
