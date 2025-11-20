@@ -186,3 +186,12 @@ nav ul li a:active {
   margin-top: 1rem;
   color: #cccccc;
 }
+
+.chart-content {
+  background: hsl(0, 0%, 30%);;
+}
+
+#pdf-button {
+  background-color:#F2A2C0;
+  color: #2B2B2B;
+}
