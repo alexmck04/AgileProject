@@ -18,7 +18,7 @@ If you are developing a production application, we recommend using TypeScript wi
 ## Terminal operations
 npm install
 
-npm install firebase
+npm install firebase (USE THIS IF GETTING FIREBASE ERRORS)
 
 To be used for CSV:
     npm install papaparse recharts

@@ -1,33 +1,44 @@
-
-
 import Header from './Header'
 import Welcomepage from './Welcomepage'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from './HomePage'
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Registerpage from "./Registerpage";
 import Loginpage from "./Loginpage";
-
-//charts page
 import ChartsPage from "./ChartsPage";
+import GamePredictor from "./GamePredictor";
 
+function Layout() {
+  const location = useLocation();
 
-function App() {
+  // Pages where NAV should NOT appear
+  const hideNavbarRoutes = ["/login", "/register", "/"];
+
+  const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
   return (
-    <Router>
-      {/* Display the header on all pages*/}
-      <Header />
+    <>
+      {!shouldHideNavbar && <Header />} 
+
       <Routes>
-        {/* Define routes for the application */}
         <Route path="/" element={<Welcomepage />} />
+        <Route path="/home" element={<HomePage />} />
+
         <Route path="/register" element={<Registerpage />} />
         <Route path="/login" element={<Loginpage />} />
-      
+
         <Route path="/charts" element={<ChartsPage />} />
-
-
+        <Route path="/predictor" element={<GamePredictor />} />
       </Routes>
-    </Router>
-  )
+    </>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <Router>
+      <Layout />
+    </Router>
+  );
+}
+
+export default App;

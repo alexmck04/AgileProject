@@ -1,42 +1,29 @@
+import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
+import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 function Loginpage() {
   const navigator = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const checkSubmit = async (e) => {
     e.preventDefault();
 
-    let email = document.getElementById("emailField").value;
-    let password = document.getElementById("passwordField").value;
-
-    if (!email || !password) {
-      alert("Please fill in all fields.");
-      return;
-    }
-
     try {
-      // Try logging in with Firebase Auth
       await signInWithEmailAndPassword(auth, email, password);
 
-      alert("Login successful!");
+      const user = auth.currentUser;
+      const ref = doc(db, "users", user.uid);
+      await getDoc(ref); // ensures Firestore is ready
 
-      // Navigate to Chartspage on success
-      navigator("/charts");
-
+      navigator("/home");
     } catch (error) {
-      console.error(error);
-
-      if (error.code === "auth/user-not-found") {
-        alert("No account found with that email.");
-      } else if (error.code === "auth/wrong-password") {
-        alert("Incorrect password.");
-      } else if (error.code === "auth/invalid-email") {
-        alert("Invalid email format.");
-      } else {
-        alert("Login failed: " + error.message);
-      }
+      if (error.code === "auth/user-not-found") alert("No account found.");
+      else if (error.code === "auth/wrong-password") alert("Incorrect password.");
+      else alert(error.message);
     }
   };
 
@@ -45,15 +32,28 @@ function Loginpage() {
       <h1>Login</h1>
 
       <form onSubmit={checkSubmit}>
-        <input type="text" id="emailField" placeholder="Enter email..." required />
-        <input type="password" id="passwordField" placeholder="Enter password..." required />
-        <button type="submit" id="submit-button">Submit</button>
+        <input
+          type="email"
+          placeholder="Enter email..."
+          autoComplete="off"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+
+        <input
+          type="password"
+          placeholder="Enter password..."
+          autoComplete="new-password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
 }
 
 export default Loginpage;
-
-
-//...

@@ -1,9 +1,10 @@
+import Navbar from "./NavBar";
+
 function Header() {
   return (
     <header>
-      <title>Game Sales System</title>
-      <h1 id="title">Game Sales System</h1>
-      
+      <h1 id="Web-Title">GS Predictor</h1>
+      <Navbar />
     </header>
   );
 }
