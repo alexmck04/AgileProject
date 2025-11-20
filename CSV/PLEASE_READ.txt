@@ -1,0 +1,3 @@
+GameSales_Final_LM.csv is the one we should be using for LM
+
+the "MLReady" one is before any extra processing
