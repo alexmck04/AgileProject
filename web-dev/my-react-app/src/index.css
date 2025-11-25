@@ -211,3 +211,16 @@ table tr:nth-child(odd) {
   background-color: #3a3a3a;
 }
 
+.prediction-results {
+  margin-top: 20px;
+  padding: 20px;
+  background: #2a2a2a;
+  border-radius: 10px;
+}
+.prediction-results h2 {
+  margin-bottom: 15px;
+}
+
+.prediction-results span {
+  font-weight: bold;
+}
