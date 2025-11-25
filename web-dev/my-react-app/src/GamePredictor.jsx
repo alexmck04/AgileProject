@@ -21,18 +21,27 @@ function GamePredictor() {
   const [genre, setGenre] = useState(genres[0]);
   const [platform, setPlatform] = useState(platforms[0]);
   const [region, setRegion] = useState(regions[0]);
+  const [prediction, setPrediction] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(
-      `Predicting with:\nTitle: ${title}\nGenre: ${genre}\nPlatform: ${platform}\nRegion: ${region}`
-    );
+    const sampleSales = (Math.random() * 100).toFixed(2);
+
+
+setPrediction({
+title,
+genre,
+platform,
+region,
+sales: sampleSales
+});
   };
 
   return (
     <div className="login-body">
       <h1>Game Predictor</h1>
 
+    { !prediction ? (
       <form onSubmit={handleSubmit}>
 
         <input
@@ -64,6 +73,24 @@ function GamePredictor() {
 
         <button type="submit">Predict</button>
       </form>
+    ) : (
+      <div className="prediction-results">
+<h2>Prediction Result</h2>
+<p><span>Title:</span> {prediction.title}</p>
+<p><span>Genre:</span> {prediction.genre}</p>
+<p><span>Platform:</span> {prediction.platform}</p>
+<p><span>Region:</span> {prediction.region}</p>
+<p><span>Predicted Sales:</span> {prediction.sales} Million</p>
+
+
+<button
+onClick={() => setPrediction(null)}
+>
+Predict Again
+</button>
+</div>
+    )}
+    
     </div>
   );
 }
