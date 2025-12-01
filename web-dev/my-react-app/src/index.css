@@ -222,75 +222,75 @@ nav ul li a:active {
     color: #007bff;
 }
 
-/* --- PREDICTION DISPLAY STYLES --- */
 
-/* Wrapper for the Critic Score slider and label */
+
+/* --- predictor styling --- */
+
+
 .input-group {
     margin: 10px 0; 
 }
 
-/* Prediction Box (Matches login-body structure but with a slightly darker contrast) */
+
 .prediction-result-box {
     margin-top: 30px;
     padding: 20px;
-    background: #232323; /* Darker background for contrast */
+    background: #232323; 
     border-radius: 10px;
     border: 1px solid #333;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     text-align: center;
 }
 
-/* Header/Title for the Result Summary */
+
 .prediction-header {
     font-size: 1.5rem;
     color: #ffffff;
     margin-bottom: 5px;
-    border-bottom: 2px solid #bb86fc; /* Primary accent color separator */
+    border-bottom: 2px solid #bb86fc; 
     padding-bottom: 8px;
 }
 
-/* Final Prediction Number (The Million Units Value) */
+
 .prediction-value {
-    color: #03dac5; /* Secondary accent color (from your chart-buttons.active) */
+    color: #03dac5; 
     font-size: 3.5em; 
     font-weight: bold;
     margin: 5px 0 15px 0;
     line-height: 1;
 }
 
-/* Wrapper for the Input Summary Table */
 .prediction-inputs-table {
     margin-top: 15px;
     padding-top: 10px;
-    border-top: 1px solid #333; /* Dark divider line */
+    border-top: 1px solid #333;
     text-align: left;
     font-size: 0.95em;
 }
 
-/* Title for the Input Parameters section */
+
 .inputs-title {
     text-align: center;
     font-size: 1.1em;
     margin-bottom: 15px;
-    color: #bb86fc; /* Use primary accent for the title */
+    color: #bb86fc; 
     font-weight: bold;
 }
 
-/* Styling for each input pair row */
+
 .input-row {
     display: flex;
     justify-content: space-between;
     padding: 6px 0;
-    border-bottom: 1px dotted #444; /* Dotted line separator */
+    border-bottom: 1px dotted #444; 
 }
 
-/* Label (e.g., 'Genre:') */
+
 .input-label {
     font-weight: 400;
     color: #e0e0e0;
 }
 
-/* Value (e.g., 'Action') */
 .input-value {
     font-weight: bold;
     color: #cccccc;
