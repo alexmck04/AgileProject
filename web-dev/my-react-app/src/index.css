@@ -5,7 +5,7 @@
 
 body {
   margin: 0;
-  background: hsl(0, 0%, 15%);
+  background: #121212;
   color: #e0e0e0;
 }
 
@@ -19,7 +19,7 @@ body {
 
 .login-body {
   text-align: center;
-   background: hsl(0, 0%, 30%);
+  background: #1e1e1e;
   padding: 3rem;
   border-radius: 14px;
   max-width: 550px;
@@ -58,14 +58,14 @@ button {
   padding: 0.7em 1.2em;
   font-size: 1.05em;
   font-weight: 600;
-  background: #9844ff;
-  color: #ffffff;
+  background: #bb86fc;
+  color: black;
   cursor: pointer;
   transition: background 0.25s, transform 0.15s;
 }
 
 button:hover {
-  background: #8c4fd6;
+  background: #a26ce6;
 }
 
 button:active {
@@ -80,7 +80,7 @@ button:active {
 }
 
 nav {
-  background-color: hsl(0, 0%, 30%);
+  background-color: #1d1d1d;
   border: 1px solid #2a2a2a;
   border-radius: 8px;
   max-width: 1100px;
@@ -120,7 +120,7 @@ nav ul li a:active {
   max-width: 1100px;
   margin: 60px auto;
   padding: 2rem;
-  background: hsl(0, 0%, 30%);
+  background: #1f1f1f;
   border-radius: 12px;
   border: 1px solid #2d2d2d;
   box-shadow: 0 0 20px rgba(187, 134, 252, 0.12);
@@ -162,7 +162,7 @@ nav ul li a:active {
 }
 
 .homepage-container {
-   background: hsl(0, 0%, 30%);
+  background: #1e1e1e;
   padding: 3rem;
   border-radius: 14px;
   max-width: 700px;
@@ -187,40 +187,111 @@ nav ul li a:active {
   color: #cccccc;
 }
 
-.chart-content {
-  background: hsl(0, 0%, 30%);;
+
+
+
+.prediction-inputs-table {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed #ccc;
+    text-align: left;
+    font-size: 0.95em;
 }
 
-#pdf-button {
-  background-color:#F2A2C0;
-  color: #2B2B2B;
+.inputs-title {
+    text-align: center;
+    font-size: 1.1em;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #444;
 }
 
-table th, table td {
-  padding: 8px 12px;
-  border: 1px solid #444;
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    border-bottom: 1px dotted #eee;
 }
 
-table th {
-  background-color: #333;
-}
-table tr:nth-child(even) {
-  background-color: #2a2a2a;
-}
-table tr:nth-child(odd) {
-  background-color: #3a3a3a;
+.input-label {
+    font-weight: bold;
+    color: #333;
 }
 
-.prediction-results {
-  margin-top: 20px;
-  padding: 20px;
-  background: #2a2a2a;
-  border-radius: 10px;
-}
-.prediction-results h2 {
-  margin-bottom: 15px;
+.input-value {
+    color: #007bff;
 }
 
-.prediction-results span {
-  font-weight: bold;
+
+
+/* --- predictor styling --- */
+
+
+.input-group {
+    margin: 10px 0; 
+}
+
+
+.prediction-result-box {
+    margin-top: 30px;
+    padding: 20px;
+    background: #232323; 
+    border-radius: 10px;
+    border: 1px solid #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+
+.prediction-header {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 5px;
+    border-bottom: 2px solid #bb86fc; 
+    padding-bottom: 8px;
+}
+
+
+.prediction-value {
+    color: #03dac5; 
+    font-size: 3.5em; 
+    font-weight: bold;
+    margin: 5px 0 15px 0;
+    line-height: 1;
+}
+
+.prediction-inputs-table {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #333;
+    text-align: left;
+    font-size: 0.95em;
+}
+
+
+.inputs-title {
+    text-align: center;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: #bb86fc; 
+    font-weight: bold;
+}
+
+
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px dotted #444; 
+}
+
+
+.input-label {
+    font-weight: 400;
+    color: #e0e0e0;
+}
+
+.input-value {
+    font-weight: bold;
+    color: #cccccc;
 }
