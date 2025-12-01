@@ -20,7 +20,7 @@ const firebaseConfig = {
 // Initialize Firebase app
 const app = initializeApp(firebaseConfig);
 
-// nalytics
+// analytics
 const analytics = getAnalytics(app);
 
 // Export services so other files can use them

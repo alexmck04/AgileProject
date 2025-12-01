@@ -1,0 +1,7 @@
+# requirements.txt
+# These versions are known to have pre-compiled wheels (avoiding the MSVC error)
+firebase-functions
+pandas
+scikit-learn
+joblib
+numpy

@@ -22,3 +22,7 @@ npm install firebase (USE THIS IF GETTING FIREBASE ERRORS)
 
 To be used for CSV:
     npm install papaparse recharts
+
+
+for the predictor
+    - firebase deploy --only functions
