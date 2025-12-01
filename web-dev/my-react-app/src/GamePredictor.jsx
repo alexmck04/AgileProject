@@ -114,6 +114,7 @@ function GamePredictor() {
           placeholder="Enter game title (ID only)..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
 
         
