@@ -330,3 +330,15 @@ prediction-inputs-table {
     font-weight: bold;
     color: #cccccc;
 }
+
+/* --- sortable table styling --- */
+
+table th {
+  cursor: pointer;
+  user-select: none;
+  padding-right: 10px;
+}
+
+table th:hover {
+  color: #4a90e2;
+}
