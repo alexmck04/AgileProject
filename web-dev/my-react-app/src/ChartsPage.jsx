@@ -24,6 +24,9 @@ function ChartsPage() {
   const [chartData, setChartData] = useState([]);
   const [view, setView] = useState("top");
 
+  const [sortColumn, setSortColumn] = useState(null);
+  const [sortOrder, setSortOrder] = useState("asc");
+
   // Load CSV
   useEffect(() => {
     fetch("/data/games.csv")
@@ -171,6 +174,40 @@ function ChartsPage() {
     pdf.save(`chart-${view}.pdf`);
   };
 
+  const handleSort = (column) => {
+  if (sortColumn === column) {
+    // Toggle sort order
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  } else {
+    setSortColumn(column);
+    setSortOrder("asc");
+  }
+};
+
+let tableData = [...chartData];
+
+if (view === "table" && sortColumn) {
+  tableData.sort((a, b) => {
+    const valA = a[sortColumn];
+    const valB = b[sortColumn];
+
+    // Numeric compare
+    if (!isNaN(valA) && !isNaN(valB)) {
+      return sortOrder === "asc" ? valA - valB : valB - valA;
+    }
+
+    // String compare
+    return sortOrder === "asc"
+      ? String(valA).localeCompare(String(valB))
+      : String(valB).localeCompare(String(valA));
+  });
+}
+
+const renderSortArrow = (column) => {
+  if (sortColumn !== column) return null;
+  return sortOrder === "asc" ? " ▲" : " ▼";
+};
+
 
   return (
     <div className="page-wrapper">
@@ -207,24 +244,44 @@ function ChartsPage() {
           <DonutChart data={chartData} />
         ) : view === "table" ? (
             <table>
-              <thead>
-                <tr>
-                  <th>Rank</th>
-                  <th>Title</th>
-                  <th>Console</th>
-                  <th>Genre</th>
-                  <th>Publisher</th>
-                  <th>Developer</th>
-                  <th>Critic Score</th>
-                  <th>Total Sales (M)</th>
-                  <th>Release Date</th>
-                </tr>
-              </thead>
+       <thead>
+  <tr>
+    <th onClick={() => handleSort("rank")}>
+      Rank{renderSortArrow("rank")}
+    </th>
+    <th onClick={() => handleSort("title")}>
+      Title{renderSortArrow("title")}
+    </th>
+    <th onClick={() => handleSort("console")}>
+      Console{renderSortArrow("console")}
+    </th>
+    <th onClick={() => handleSort("genre")}>
+      Genre{renderSortArrow("genre")}
+    </th>
+    <th onClick={() => handleSort("publisher")}>
+      Publisher{renderSortArrow("publisher")}
+    </th>
+    <th onClick={() => handleSort("developer")}>
+      Developer{renderSortArrow("developer")}
+    </th>
+    <th onClick={() => handleSort("critic_score")}>
+      Critic Score{renderSortArrow("critic_score")}
+    </th>
+    <th onClick={() => handleSort("total_sales")}>
+      Total Sales (M){renderSortArrow("total_sales")}
+    </th>
+    <th onClick={() => handleSort("release_date")}>
+      Release Date{renderSortArrow("release_date")}
+    </th>
+  </tr>
+</thead>
               <tbody>
-                {chartData.map((game, index) => (
+                {tableData.map((game, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{game.title}</td>
+                    <td id="game-title-cell">
+                     <a href={`https://www.google.com/search?q=${encodeURIComponent(game.title)}`} target="_blank" rel="noopener noreferrer"> 
+                    {game.title}</a></td>
                     <td>{game.console}</td>
                     <td>{game.genre}</td>
                     <td>{game.publisher}</td>
