@@ -1,11 +1,8 @@
-import os
 from firebase_functions import https_fn
 from firebase_admin import initialize_app
 import joblib 
 import pandas as pd
-import numpy as np
-import json 
-from typing import Set
+import json
 
 # years for the consoles
 LAST_ACTIVE_YEAR = {
