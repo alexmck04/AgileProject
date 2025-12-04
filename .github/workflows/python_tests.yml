@@ -1,0 +1,50 @@
+# .github/workflows/python_tests.yml
+
+# GitHub Action to automatically run Python unit tests
+
+name: Python CI/CD Tests
+
+# Triggers the workflow on push and pull request events to the main/master branches
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  test_and_lint:
+    # Runs on the latest stable version of Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository code
+      # Standard action to pull the repository contents
+      uses: actions/checkout@v4
+
+    - name: Set up Python Environment
+      # Standard action to configure the Python version
+      uses: actions/setup-python@v5
+      with:
+        # Use a recent Python version
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        # Upgrade pip and install testing (pytest) and linting (flake8) tools
+        python -m pip install --upgrade pip
+        pip install pytest flake8
+
+    - name: Lint with Flake8
+      # Runs the linter on all Python files.
+      run: |
+        echo "Running Flake8 linting..."
+        # Check for syntax errors (E9) and undefined names (F)
+        flake8 . --count --select=E9,F --show-source
+        # Check general style, exiting with 0 status code for warnings (optional)
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
+
+    - name: Run Pytest Unit Tests
+      # Pytest automatically discovers and runs tests in files/directories named 'test'
+      run: |
+        echo "Running Pytest unit tests..."
+        pytest
