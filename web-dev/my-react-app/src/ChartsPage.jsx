@@ -279,7 +279,9 @@ const renderSortArrow = (column) => {
                 {tableData.map((game, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{game.title}</td>
+                    <td id="game-title-cell">
+                     <a href={`https://www.google.com/search?q=${encodeURIComponent(game.title)}`} target="_blank" rel="noopener noreferrer"> 
+                    {game.title}</a></td>
                     <td>{game.console}</td>
                     <td>{game.genre}</td>
                     <td>{game.publisher}</td>

@@ -342,3 +342,16 @@ table th {
 table th:hover {
   color: #4a90e2;
 }
+
+#game-title-cell a {
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  color: inherit;
+}
+
+#game-title-cell:hover {
+  text-decoration: underline;
+  color: #3e79b8;
+}
+
