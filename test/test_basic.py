@@ -1,5 +1,4 @@
-# test/test_file_structure.py
-
+# test/test_basic.py
 # This script verifies that essential files and directories exist
 
 import os.path
