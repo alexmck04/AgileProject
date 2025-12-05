@@ -16,12 +16,10 @@ function GamePredictor() {
     "Wii","WiiU","X360","XB","XBL","XOne","XS","iOS"
   ];
 
-  const regions = ["All", "Europe", "NA", "Japan"];
-
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState(genres[0]);
   const [platform, setPlatform] = useState(platforms[0]);
-  const [region, setRegion] = useState(regions[0]);
+  // Region state removed as it is now static
   
   const [criticScore, setCriticScore] = useState(70); 
   const [releaseYear, setReleaseYear] = useState(2025); 
@@ -29,10 +27,10 @@ function GamePredictor() {
   const [prediction, setPrediction] = useState(null); 
   const [loading, setLoading] = useState(false);
   
-  
+  // stores inputs
   const [lastInputs, setLastInputs] = useState(null);
 
-  
+  // url for predictor
   const API_URL = 'https://predict-sales-zmsrqrwcya-uc.a.run.app'; 
 
   const handleExport = () => {
@@ -45,22 +43,15 @@ function GamePredictor() {
     setPrediction(null);
     setLastInputs(null);
 
+    // Region logic is now static: All Regions
+    const regionsList = ["NA", "EU", "Japan", "Other"];
 
-    
-    let regionsList = [];
-    if (region === "All") regionsList = ["NA", "EU", "Japan", "Other"];
-    else if (region === "Europe") regionsList = ["EU"];
-    else if (region === "NA") regionsList = ["NA"];
-    else if (region === "Japan") regionsList = ["Japan"];
-
-
-    
+    // fixing naming
     let finalPlatform = platform;
     if (platform === "MAC") finalPlatform = "OSX";
     if (platform === "PS1") finalPlatform = "PS";
 
-
-    
+    // creating payload
     const payload = {
       Genre: genre,
       Platform: finalPlatform,
@@ -69,16 +60,14 @@ function GamePredictor() {
       Regions: regionsList
     };
 
-
-    
-
+    // inputs defined
     setLastInputs({
         Title: title || 'N/A',
         Genre: genre,
         Platform: platform,
         Year: releaseYear,
         Score: criticScore,
-        Region: regionsList.join(', ') || 'None'
+        Region: 'Global (All Regions)'
     });
 
     try {
@@ -117,7 +106,7 @@ function GamePredictor() {
           required
         />
 
-        
+        {/* release year */}
         <input
           type="number"
           placeholder="Release Year (e.g., 2025)"
@@ -128,7 +117,7 @@ function GamePredictor() {
           required
         />
         
-        
+        {/* critic score */}
         <div className="input-group">
           <label className="score-label">Critic Score (0-100): {criticScore}</label>
           <input 
@@ -140,49 +129,46 @@ function GamePredictor() {
           />
         </div>
 
-        
+        {/* genre selector */}
         <select value={genre} onChange={(e) => setGenre(e.target.value)}>
           {genres.map((g) => (
             <option key={g} value={g}>{g}</option>
           ))}
         </select>
 
-        
+        {/* platform selector */}
         <select value={platform} onChange={(e) => setPlatform(e.target.value)}>
           {platforms.map((p) => (
             <option key={p} value={p}>{p}</option>
           ))}
         </select>
 
-        
-        <select value={region} onChange={(e) => setRegion(e.target.value)}>
-          {regions.map((r) => (
-            <option key={r} value={r}>{r}</option>
-          ))}
-        </select>
+        {/* region text */}
+        <div style={{ margin: "15px 0", color: "#e0e0e0", fontWeight: "bold" }}>
+            Game will be released in all regions
+        </div>
 
         <button type="submit" disabled={loading}>
           {loading ? "Calculating..." : "Predict Sales"}
         </button>
       </form>
 
-
-      
+      {/* prediction display */}
       {prediction !== null && lastInputs && (
         <div className="prediction-result-box">
           
           <h2 className="prediction-header">Prediction Result Summary</h2>
           
-          
+          {/* show final prediction with absolute value to prevent negative numbers */}
           <div className="final-prediction">
             Predicted Global Sales:
-            <h1 className="prediction-value">{prediction} Million Units</h1>
+            <h1 className="prediction-value">{Math.abs(prediction)} Million Units</h1>
           </div>
 
           <div className="prediction-inputs-table">
             <h3 className="inputs-title">Input Parameters</h3>
 
-            
+            {/* maps inputs to a structured list for easier printing */}
             {Object.entries(lastInputs).map(([key, value]) => (
                 <div key={key} className="input-row">
                     <span className="input-label">{key}:</span>
