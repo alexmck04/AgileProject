@@ -4,7 +4,7 @@
 import os.path
 import pytest
 
-# Define the root directory (where the tests are run from)
+# Define the root directory
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # --- Root-level Checks ---
@@ -28,7 +28,7 @@ REQUIRED_SRC_FILES = [
     "HomePage.jsx",
     "ChartsPage.jsx",
     "firebase.js",
-    "App.jsx", # Added a common file for robustness
+    "App.jsx",
 ]
 
 @pytest.mark.parametrize("filename", REQUIRED_SRC_FILES)
@@ -45,9 +45,9 @@ def test_react_config_and_data_files_exist():
     required_files = [
         # Root of React App
         os.path.join('web-dev', 'my-react-app', 'package.json'),
-        # Data/ML File (seen in screenshot)
+        # Data/ML File
         os.path.join('web-dev', 'my-react-app', 'GameSales_Final_ML.csv'),
-        # Python script (seen in screenshot)
+        # Python script
         os.path.join('web-dev', 'my-react-app', 'train.py'),
     ]
 
