@@ -55,7 +55,7 @@ function ChartsPage() {
           genre: r.genre,
           publisher: r.publisher,
           developer: r.developer,
-          critic_score: parseFloat(r.critic_score),
+          critic_score: (parseFloat(r.critic_score)).toFixed(1),
           total_sales: parseFloat(r.total_sales),
           release_date: r.release_date,
         }))
