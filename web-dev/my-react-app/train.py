@@ -4,6 +4,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 import os
 
+import numpy as np
+
+
 current_dir = os.path.dirname(os.path.abspath(__file__))
 csv_path = os.path.join(current_dir, "GameSales_Final_ML.csv")
 df = pd.read_csv(csv_path) 
