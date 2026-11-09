@@ -157,13 +157,13 @@ This project was developed as part of a college software development group proje
 # Screenshots
 
 # Top games
-![Top games](screenshots/Top-games.png)
+![Top games](web-dev/my-react-app/screenshots/Top-games.png)
 
 # Table view
-![Table view](screenshots/Table-view.png)
+![Table view](web-dev/my-react-app/screenshots/Table-view.png)
 
 # Game sales predictor
-![Game sales predictor](screenshots/Game-sales-predictor.png)
+![Game sales predictor](web-dev/my-react-app/screenshots/Game-sales-predictor.png)
 
 # Game sales prediction summary
-![Game sales predicton summary](screenshots/Game-sales-predicton-summary.png)
+![Game sales predicton summary](web-dev/my-react-app/screenshots/Game-sales-prediction-summary.png)
